@@ -26,7 +26,12 @@ export class CreateCourseStep1Component {
   getDateClass : MatCalendarCellClassFunction<Date> = (cellDate, view) => {
     const dayOfWeek = cellDate.getDay();
     return (dayOfWeek === 0 || dayOfWeek === 6) ? 'highlight-date' : '';
-  }
+  };
+
+  holidayDateFilter = (date: Date): boolean => {
+    const dayOfWeek = date?.getDay();
+    return !!dayOfWeek && (dayOfWeek !== 0 && dayOfWeek !== 6);
+  };
 
   constructor(private fb: UntypedFormBuilder) {
 

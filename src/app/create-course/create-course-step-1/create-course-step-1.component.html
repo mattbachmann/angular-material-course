@@ -31,7 +31,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [matDatepicker]="releasedAtPicker" placeholder="Select release date" formControlName="releasedAt">
+    <input matInput [matDatepicker]="releasedAtPicker" [matDatepickerFilter]="holidayDateFilter" placeholder="Select release date" formControlName="releasedAt">
     <mat-datepicker-toggle matSuffix [for]="releasedAtPicker"></mat-datepicker-toggle>
     <mat-datepicker [dateClass]="getDateClass" #releasedAtPicker></mat-datepicker>
   </mat-form-field>
