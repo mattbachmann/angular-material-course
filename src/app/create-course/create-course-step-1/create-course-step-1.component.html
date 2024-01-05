@@ -9,12 +9,10 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" floatLabel="always">
-    <input matInput placeholder="Course Title" formControlName="title">
-    <mat-label>Course Title</mat-label>
-    <span matPrefix>Discount: </span>
-    <span matSuffix>%</span>
-  </mat-form-field>
+<mat-radio-group class="course-type" formControlName="courseType"> <!-- no need to wrap in mat-form-field -->
+  <mat-radio-button [disabled]="true" value="free">Free</mat-radio-button>
+  <mat-radio-button value="premium">Premium</mat-radio-button>
+</mat-radio-group>
 
 </div>
 
