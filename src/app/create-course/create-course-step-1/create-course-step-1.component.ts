@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
+import {MatCalendarCellClassFunction} from "@angular/material/datepicker";
 
 
 @Component({
@@ -22,9 +23,15 @@ export class CreateCourseStep1Component {
     longDescription: ['', [Validators.required, Validators.minLength(3)]]
   });
 
+  getDateClass : MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+    const dayOfWeek = cellDate.getDay();
+    return (dayOfWeek === 0 || dayOfWeek === 6) ? 'highlight-date' : '';
+  }
+
   constructor(private fb: UntypedFormBuilder) {
 
   }
+
 
   get courseTitle() {
     return this.form.controls['title'];
