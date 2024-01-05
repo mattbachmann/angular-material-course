@@ -3,16 +3,32 @@
   <mat-form-field floatLabel="auto">
     <input matInput formControlName="title">
     <mat-label>Course Title</mat-label>
-    <mat-hint align="end">{{ courseTitle.value.length }} / 60 </mat-hint>
+    <mat-hint align="end">{{ courseTitle.value.length }} / 60</mat-hint>
     <mat-error *ngIf="courseTitle.errors?.required || courseTitle.errors?.minlength">
       A minimum of 5 characters is required
     </mat-error>
   </mat-form-field>
 
-<mat-radio-group class="course-type" formControlName="courseType"> <!-- no need to wrap in mat-form-field -->
-  <mat-radio-button [disabled]="true" value="free">Free</mat-radio-button>
-  <mat-radio-button value="premium">Premium</mat-radio-button>
-</mat-radio-group>
+  <mat-radio-group class="course-type" formControlName="courseType"> <!-- no need to wrap in mat-form-field -->
+    <mat-radio-button [disabled]="true" value="free">Free</mat-radio-button>
+    <mat-radio-button value="premium">Premium</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field appearance="outline">
+    <mat-select formControlName="category" placeholder="Select category">
+<!--    <mat-select formControlName="category" placeholder="Select category" multiple>--> <!-- multiple select -->
+
+      <mat-option>None</mat-option>
+      <mat-option value="ADVANCED">Advanced</mat-option>
+      <mat-option value="INTERMEDIATE">Intermediate</mat-option>
+      <mat-optgroup label="Beginners"> <!-- organize options into groups -->
+        <mat-option value="BEGINNER">Beginner</mat-option>
+        <mat-option value="NEWBIE">Newbie</mat-option>
+        <mat-option value="ROOKIE">Rookie</mat-option>
+      </mat-optgroup>
+
+    </mat-select>
+  </mat-form-field>
 
 </div>
 
