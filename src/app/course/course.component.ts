@@ -19,6 +19,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
   readonly DEFAULT_PAGE_SIZE = 3;
 
   @ViewChild(MatPaginator) paginator: MatPaginator; // Use first reference of MatPaginator
+  @ViewChild(MatSort) sort: MatSort; // Use first reference of MatSort
 
   course: Course;
 
@@ -40,7 +41,10 @@ export class CourseComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.paginator.page
+
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); // reset paginator when sort is changed
+
+    merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         tap(() => this.loadLessonsPage())
       )
@@ -53,9 +57,10 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
     this.coursesService.findLessons(
       this.course.id,
-      'asc',
+      this.sort?.direction ?? 'asc',
       this.paginator?.pageIndex ?? 0,
-      this.paginator?.pageSize ?? this.DEFAULT_PAGE_SIZE
+      this.paginator?.pageSize ?? this.DEFAULT_PAGE_SIZE,
+      this.sort?.active ?? 'seqNo',
     )
       .pipe(
         catchError(err => {
