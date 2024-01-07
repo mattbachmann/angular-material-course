@@ -16,6 +16,9 @@ import {Lesson} from "../model/lesson";
   styleUrls: ['./course.component.scss']
 })
 export class CourseComponent implements OnInit, AfterViewInit {
+  readonly DEFAULT_PAGE_SIZE = 3;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator; // Use first reference of MatPaginator
 
   course: Course;
 
@@ -37,14 +40,23 @@ export class CourseComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-
+    this.paginator.page
+      .pipe(
+        tap(() => this.loadLessonsPage())
+      )
+      .subscribe();
 
   }
 
   private loadLessonsPage() {
     this.loading = true; // set loading to true
 
-    this.coursesService.findLessons(this.course.id, 'asc', 0, 3)
+    this.coursesService.findLessons(
+      this.course.id,
+      'asc',
+      this.paginator?.pageIndex ?? 0,
+      this.paginator?.pageSize ?? this.DEFAULT_PAGE_SIZE
+    )
       .pipe(
         catchError(err => {
           console.log('error loading lessons page...');
