@@ -26,6 +26,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
   lessons: Lesson[] = [];
   displayedColumns = ['seqNo', 'description', 'duration'];
   loading: boolean = false;
+  expandedLesson: Lesson;
 
   constructor(private route: ActivatedRoute,
               private coursesService: CoursesService) {
@@ -72,5 +73,13 @@ export class CourseComponent implements OnInit, AfterViewInit {
         finalize(() => this.loading = false), // reset loading to false
       )
       .subscribe(lessons => this.lessons = lessons);
+  }
+
+  onToggleLesson(lesson) {
+    if (lesson == this.expandedLesson) {
+      this.expandedLesson = null;
+    } else {
+      this.expandedLesson = lesson;
+    }
   }
 }
