@@ -76,3 +76,9 @@ mat-paginator {
 .collapsed-detail {
   display: none;
 }
+
+.scrolling-container {
+  width: 350px;
+  height: 350px;
+  overflow: auto;
+}
