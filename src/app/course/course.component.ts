@@ -8,6 +8,7 @@ import {CoursesService} from '../services/courses.service';
 import {debounceTime, distinctUntilChanged, startWith, tap, delay, catchError, finalize} from 'rxjs/operators';
 import {merge, fromEvent, of, throwError} from 'rxjs';
 import {Lesson} from "../model/lesson";
+import {SelectionModel} from "@angular/cdk/collections";
 
 
 @Component({
@@ -21,10 +22,12 @@ export class CourseComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator; // Use first reference of MatPaginator
   @ViewChild(MatSort) sort: MatSort; // Use first reference of MatSort
 
+  selection = new SelectionModel<Lesson>(true, []);
+
   course: Course;
 
   lessons: Lesson[] = [];
-  displayedColumns = ['seqNo', 'description', 'duration'];
+  displayedColumns = ['select', 'seqNo', 'description', 'duration'];
   loading: boolean = false;
   expandedLesson: Lesson;
 
@@ -75,11 +78,32 @@ export class CourseComponent implements OnInit, AfterViewInit {
       .subscribe(lessons => this.lessons = lessons);
   }
 
-  onToggleLesson(lesson) {
+  onToggleExpandLesson(lesson) {
     if (lesson == this.expandedLesson) {
       this.expandedLesson = null;
     } else {
       this.expandedLesson = lesson;
+    }
+  }
+
+  onLessonSelectionToggled(lesson) {
+    this.selection.toggle(lesson);
+    console.log(this.selection.selected);
+  }
+
+  isLessonSelected(lesson) {
+    return this.selection.isSelected(lesson);
+  }
+
+  isAllSelected() {
+    return this.selection.hasValue() && this.selection.selected?.length === this.lessons?.length;
+  }
+
+  toggleAllSelected() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+    } else {
+      this.selection.select(...this.lessons);
     }
   }
 }
