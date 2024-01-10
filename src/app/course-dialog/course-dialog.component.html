@@ -1,12 +1,8 @@
+<div class="edit-course-form" [formGroup]="form">
+  <h2 mat-dialog-title>{{title}}</h2>
 
-
-
-
-
-
-<!--
-
-     <mat-form-field>
+  <mat-dialog-content>
+    <mat-form-field>
 
       <input matInput
              placeholder="Course Description"
@@ -20,11 +16,14 @@
                   formControlName="category">
 
         <mat-option value="BEGINNER">
-          Beginner</mat-option>
+          Beginner
+        </mat-option>
         <mat-option value="INTERMEDIATE">
-          Intermediate</mat-option>
+          Intermediate
+        </mat-option>
         <mat-option value="ADVANCED">
-          Advanced</mat-option>
+          Advanced
+        </mat-option>
 
       </mat-select>
 
@@ -53,7 +52,11 @@
 
     </mat-form-field>
 
+  </mat-dialog-content>
 
+  <mat-dialog-actions>
+    <button mat-raised-button (click)="close()">Close</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+  </mat-dialog-actions>
+</div>
 
-
- -->
