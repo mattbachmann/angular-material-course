@@ -90,4 +90,10 @@ export class DragDropComponent {
     }
   ];
 
+  drop(event: CdkDragDrop<Lesson[]>) {
+    console.log(event.previousIndex);
+    console.log(event.currentIndex);
+
+    moveItemInArray(this.lessons, event.previousIndex, event.currentIndex);
+  }
 }
