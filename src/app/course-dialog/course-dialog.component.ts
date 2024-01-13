@@ -47,6 +47,8 @@ export function  openEditCourseDialog(dialog: MatDialog, course: Course): Observ
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
   dialogConfig.data = {...course};
+  dialogConfig.panelClass = 'modal-panel';
+  // dialogConfig.backdropClass = 'backdrop-modal-panel';
 
   const dialogRef = dialog.open(CourseDialogComponent, dialogConfig);
 

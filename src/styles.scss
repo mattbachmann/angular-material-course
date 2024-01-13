@@ -3,6 +3,9 @@
 
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
+@import './mixins';
+@include responsive-dialogs;
+
 .highlight-date { // won't apply to material components unless global
   background: lightgray !important;
 }
