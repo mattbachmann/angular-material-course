@@ -1,0 +1,17 @@
+@import '../styles.scss';
+
+>>> body {
+    margin: 0;
+}
+
+main {
+    margin: 30px;
+}
+
+mat-toolbar a {
+  color: $dark-primary-text;
+}
+
+//mat-tab-header {
+//  color: $dark-primary-text;
+//}

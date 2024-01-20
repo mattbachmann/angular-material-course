@@ -1,7 +1,99 @@
 @use '@angular/material' as mat;
+
 /* You can add global styles to this file, and also import other style files */
 
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
+//@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+//// Create own theme:
+// https://github.com/angular-university/angular-material-course/blob/master/src/styles.scss
+
+@include mat.core();
+
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+
+// primary palette (default main color blue)
+// different colors with different strength = shades of 500 which is primary color
+$mat-primary: (
+  50: #eae8e3,
+  100: #fff3c9,
+  200: #fae6a0,
+  300: #fedd70,
+  400: #f6cd44,
+  500: #efb804,
+  600: #cc9e06,
+  700: #a37e05,
+  800: #685002,
+  900: #413201,
+  A100: #8c9eff,
+  A200: #536dfe,
+  A400: #3d5afe,
+  A700: #304ffe,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $dark-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+// accent palette (default main color pink)
+$mat-accent: (
+  50: #e2dbea,
+  100: #e4d9f3,
+  200: #d1b3f9,
+  300: #c29af9,
+  400: #aa6ff9,
+  500: #9850f9,
+  600: #7533cd,
+  700: #5b1fac,
+  800: #3a1072,
+  900: #230748,
+  A100: #ff80ab,
+  A200: #ff4081,
+  A400: #f50057,
+  A700: #c51162,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+// warn palette is optional (default red-palette)
+
+$primary: mat.define-palette($mat-primary);
+$accent: mat.define-palette($mat-accent);
+
+$theme: mat.define-light-theme($primary, $accent);
+
+@include mat.all-component-themes($theme);
+// Or can style only specific components:
+@include mat.button-theme($theme);
+
+//// End create own theme
+
 
 @import './mixins';
 @include responsive-dialogs;
